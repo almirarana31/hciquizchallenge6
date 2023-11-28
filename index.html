@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HCI Challenge 6</title>
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>Contact Form</h1>
+      </div>
+    </header>
+    <div class="container">
+      <form id="myForm">
+        <div class="form-group">
+          <label for="fname">First name:</label>
+          <input type="text" id="fname" name="fname" class="form-control">
+          <span class="error-text">Required</span>
+        </div>
+        <div class="form-group">
+          <label for="lname">Last name:</label>
+          <input type="text" id="lname" name="lname" class="form-control">
+          <span class="error-text">Required</span>
+        </div>
+        <div class="form-group">
+          <label for="email">Email address:</label>
+          <input type="email" id="email" name="email" class="form-control">
+          <span class="error-text">Required</span>
+        </div>
+        <div class="form-group">
+          <label for="message">Message:</label>
+          <textarea id="message" name="message" rows="4" cols="50" class="form-control" required placeholder="Enter your message...""></textarea>
+          <span class="error-text">Required</span>
+        </div>
+        <div>
+          <button type="submit" class="butn">Submit</button>
+        </div>
+      </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $("#myForm").submit(function(event) {
+          event.preventDefault();
+          $("#message").focus(function() {
+          $(".suggested-text").hide();
+        });
+          var valid = true;
+
+          $(".form-control").each(function() {
+            if ($(this).val() === "") {
+              valid = false;
+              $(this).addClass("error");
+              $(this).next(".error-text").show();
+            } else {
+              $(this).removeClass("error");
+              $(this).next(".error-text").hide();
+            }
+          });
+          if (valid) {
+            alert("Form submitted successfully!");
+            $("#myForm")[0].reset();
+          } else {
+            alert("Please fill in all required fields.");
+          }
+        });
+        $(".form-control").focus(function() {
+          $(this).removeClass("error");
+          $(this).next(".error-text").hide();
+        });
+      });
+    </script>
+  </body>
+</html>
